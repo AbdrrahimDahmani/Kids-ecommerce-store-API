@@ -1,0 +1,27 @@
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { User } from './user.entity';
+import { CommandeStatus } from 'src/enum/commande-status.enum';
+
+@Entity()
+export class Commande {
+  @PrimaryGeneratedColumn('increment')
+  id: string;
+
+  @ManyToOne(() => User, (user) => user.commandes)
+  user: User;
+
+  @Column()
+  dateCommande: Date;
+
+  @Column()
+  prixTotal: number;
+
+  @Column()
+  tauxRemise: number;
+
+  @Column()
+  tauxTva: number;
+
+  @Column()
+  status: CommandeStatus;
+}
