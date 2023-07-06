@@ -1,9 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { UserDto } from 'src/dtos/createUser.dto';
 import { User } from 'src/entities';
 import { DataSource, Repository } from 'typeorm';
@@ -20,7 +15,7 @@ export class UserRepository extends Repository<User> {
         id,
       },
     });
-    if (!user) throw new NotFoundException('User not found');
+    if (!user) throw new NotFoundException('Utilisateur not found');
     return user;
   }
 
@@ -34,13 +29,7 @@ export class UserRepository extends Repository<User> {
       ville,
       email,
     });
-    try {
-      return await this.save(newUser);
-    } catch (error) {
-      if (error.code === '23505')
-        throw new ConflictException('Mail already exists');
-      else throw new InternalServerErrorException();
-    }
+    return await this.save(newUser);
   }
   async updateUser(id: string, userDto: UserDto): Promise<User> {
     const { nom, prenom, tel, adresse, ville, email } = userDto;
@@ -55,6 +44,7 @@ export class UserRepository extends Repository<User> {
   }
   async deleteUser(id: string): Promise<string> {
     const user = await this.getUserById(id);
-    if (await this.remove(user)) return `User with id: ${id} was removed`;
+    if (await this.remove(user))
+      return `Utilisateur aved l'id: ${id} est supprimé`;
   }
 }

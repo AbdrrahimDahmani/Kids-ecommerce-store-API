@@ -1,6 +1,7 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { User } from './user.entity';
 import { CommandeStatus } from 'src/enum/commande-status.enum';
+import { Commercial } from './commercial.entity';
 
 @Entity()
 export class Commande {
@@ -24,4 +25,7 @@ export class Commande {
 
   @Column()
   status: CommandeStatus;
+
+  @ManyToOne(() => Commercial, (commercial) => commercial.commandes)
+  commercial: Commercial;
 }

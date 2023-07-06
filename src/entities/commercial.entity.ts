@@ -1,8 +1,8 @@
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { Commande } from './commande.entity';
 
 @Entity()
-export class User {
+export class Commercial {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
@@ -13,17 +13,17 @@ export class User {
   prenom: string;
 
   @Column()
+  mail: string;
+
+  @Column()
   tel: string;
 
   @Column()
   adresse: string;
 
   @Column()
-  ville: string;
+  password: string;
 
-  @Column()
-  email: string;
-
-  @OneToMany(() => Commande, (commande) => commande.user)
+  @OneToMany(() => Commande, (commande) => commande.commercial)
   commandes: Commande[];
 }

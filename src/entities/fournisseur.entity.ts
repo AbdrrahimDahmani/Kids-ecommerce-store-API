@@ -8,7 +8,7 @@ export class Fournisseur {
   @Column()
   nom: string;
 
-  @Column()
+  @Column({ unique: true })
   email: string;
 
   @Column()
