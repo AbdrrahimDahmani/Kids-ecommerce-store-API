@@ -23,7 +23,6 @@ export class MarqueRepository extends Repository<Marque> {
       );
 
     const marques = await query.getMany();
-    if (marques.length === 0) throw new NotFoundException('marques non trouvé');
 
     return marques;
   }

@@ -15,9 +15,22 @@ export class CategorieRepository extends Repository<Categorie> {
     super(Categorie, datasource.createEntityManager());
   }
 
+  async getAllCategories(nom: string): Promise<Categorie[]> {
+    const query = this.createQueryBuilder('categorie');
+
+    if (nom)
+      query.andWhere('Lower(categorie.nom) LIKE :search', {
+        search: `%${nom.toLowerCase()}%`,
+      });
+
+    const categories = await query.getMany();
+
+    return categories;
+  }
+
   async getCategorieById(id: number): Promise<Categorie> {
     const categorie = await this.findOne({ where: { id } });
-    if (!categorie) throw new NotFoundException('Utilisateur not found');
+    if (!categorie) throw new NotFoundException('Categorie not found');
     return categorie;
   }
 

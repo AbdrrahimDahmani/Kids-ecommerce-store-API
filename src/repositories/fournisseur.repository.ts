@@ -17,7 +17,7 @@ export class FournisseurRepository extends Repository<Fournisseur> {
 
   async getFournisseurById(id: string): Promise<Fournisseur> {
     const fournisseur = await this.findOne({ where: { id } });
-    if (!fournisseur) throw new NotFoundException('Utilisateur not found');
+    if (!fournisseur) throw new NotFoundException('Categorie not found');
     return fournisseur;
   }
 

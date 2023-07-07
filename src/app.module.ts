@@ -5,6 +5,7 @@ import { ProductsModule } from './products/products.module';
 import { FournisseursModule } from './fournisseurs/fournisseurs.module';
 import { MarqueModule } from './marque/marque.module';
 import { CategoriesModule } from './categories/categories.module';
+import { TagsModule } from './tags/tags.module';
 import entities from './entities';
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import entities from './entities';
     FournisseursModule,
     MarqueModule,
     CategoriesModule,
+    TagsModule,
   ],
 })
 export class AppModule {}
