@@ -9,7 +9,8 @@ import {
 } from '@nestjs/common';
 import { Fournisseur } from 'src/entities';
 import { FournisseursService } from './fournisseurs.service';
-import { FournisseurDto } from 'src/dtos/createFournisseur';
+import { FournisseurDto } from 'src/dtos/fournisseurDto/createFournisseur';
+import { UpdateFournisseurDto } from 'src/dtos/fournisseurDto/update-fournisseur.dto';
 
 @Controller('fournisseurs')
 export class FournisseursController {
@@ -39,7 +40,7 @@ export class FournisseursController {
     @Param('id')
     id: string,
     @Body()
-    fournisseurDto: FournisseurDto,
+    fournisseurDto: UpdateFournisseurDto,
   ): Promise<Fournisseur> {
     return this.fournisseurService.updateFournisseur(id, fournisseurDto);
   }

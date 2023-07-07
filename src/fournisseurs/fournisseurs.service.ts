@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { FournisseurDto } from 'src/dtos/createFournisseur';
+import { FournisseurDto } from 'src/dtos/fournisseurDto/createFournisseur';
+import { UpdateFournisseurDto } from 'src/dtos/fournisseurDto/update-fournisseur.dto';
 import { Fournisseur } from 'src/entities';
 import { FournisseurRepository } from 'src/repositories';
 
@@ -26,7 +27,7 @@ export class FournisseursService {
   }
   async updateFournisseur(
     id: string,
-    fournisseurDto: FournisseurDto,
+    fournisseurDto: UpdateFournisseurDto,
   ): Promise<Fournisseur> {
     return this.fournisseurRepo.updateFournisseur(id, fournisseurDto);
   }

@@ -4,7 +4,8 @@ import {
   InternalServerErrorException,
   NotFoundException,
 } from '@nestjs/common';
-import { FournisseurDto } from 'src/dtos/createFournisseur';
+import { FournisseurDto } from 'src/dtos/fournisseurDto/createFournisseur';
+import { UpdateFournisseurDto } from 'src/dtos/fournisseurDto/update-fournisseur.dto';
 import { Fournisseur } from 'src/entities';
 import { DataSource, Repository } from 'typeorm';
 
@@ -36,7 +37,7 @@ export class FournisseurRepository extends Repository<Fournisseur> {
 
   async updateFournisseur(
     id: string,
-    fournisseurDto: FournisseurDto,
+    fournisseurDto: UpdateFournisseurDto,
   ): Promise<Fournisseur> {
     const { nom, email, adresse, tel } = fournisseurDto;
     const fournisseur = await this.getFournisseurById(id);

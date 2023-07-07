@@ -3,6 +3,8 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsersModule } from './users/users.module';
 import { ProductsModule } from './products/products.module';
 import { FournisseursModule } from './fournisseurs/fournisseurs.module';
+import { MarqueModule } from './marque/marque.module';
+import { CategoriesModule } from './categories/categories.module';
 import entities from './entities';
 @Module({
   imports: [
@@ -20,8 +22,8 @@ import entities from './entities';
     UsersModule,
     ProductsModule,
     FournisseursModule,
+    MarqueModule,
+    CategoriesModule,
   ],
-  controllers: [],
-  providers: [],
 })
 export class AppModule {}

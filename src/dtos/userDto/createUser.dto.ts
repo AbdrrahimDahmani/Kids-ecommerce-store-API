@@ -1,4 +1,4 @@
-import { IsNotEmpty, Matches } from 'class-validator';
+import { IsEmail, IsNotEmpty, IsPhoneNumber } from 'class-validator';
 
 export class UserDto {
   @IsNotEmpty()
@@ -6,14 +6,13 @@ export class UserDto {
   @IsNotEmpty()
   prenom: string;
   @IsNotEmpty()
+  @IsPhoneNumber('MO')
   tel: string;
   @IsNotEmpty()
   adresse: string;
   @IsNotEmpty()
   ville: string;
   @IsNotEmpty()
-  @Matches(/^[\w.-]+@[a-zA-Z_-]+?(?:\.[a-zA-Z]{2,})+$/, {
-    message: 'Veuillez entrer un email valide',
-  })
+  @IsEmail()
   email: string;
 }

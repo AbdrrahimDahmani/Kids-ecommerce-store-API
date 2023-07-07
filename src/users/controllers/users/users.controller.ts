@@ -8,8 +8,9 @@ import {
   Query,
   Delete,
 } from '@nestjs/common';
-import { UserDto } from 'src/dtos/createUser.dto';
-import { FilterUser } from 'src/dtos/filter-user.dto';
+import { UserDto } from 'src/dtos/userDto/createUser.dto';
+import { FilterUser } from 'src/dtos/userDto/filter-user.dto';
+import { UpdateUserDto } from 'src/dtos/userDto/update-user.dto';
 import { User } from 'src/entities';
 import { UsersService } from 'src/users/services/users/users.service';
 
@@ -32,8 +33,11 @@ export class UsersController {
     return this.usersService.createUser(userDto);
   }
 
-  @Patch('/:id/update')
-  updateUser(@Param('id') id: string, @Body() userDto: UserDto): Promise<User> {
+  @Patch('/:id')
+  updateUser(
+    @Param('id') id: string,
+    @Body() userDto: UpdateUserDto,
+  ): Promise<User> {
     return this.usersService.updateUser(id, userDto);
   }
 

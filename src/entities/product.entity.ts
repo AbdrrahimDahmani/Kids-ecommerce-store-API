@@ -5,7 +5,6 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
-  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Categorie } from './categorie.entity';
@@ -53,8 +52,8 @@ export class Product {
   })
   categories: Categorie[];
 
-  @OneToMany(() => Marque, (marque) => marque.products)
-  marque: Marque;
+  @ManyToOne(() => Marque, (marque) => marque.products)
+  marque: Marque[];
 
   @ManyToMany(() => Tag, (tag) => tag.products)
   @JoinTable({
