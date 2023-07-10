@@ -23,19 +23,19 @@ export class Product {
   @Column()
   description: string;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   prixFournisseur: number;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   prix: number;
 
   @Column()
   tauxPromo: number;
 
   @Column()
-  QuantiteStock: number;
+  quantiteStock: number;
 
-  @Column()
+  @Column({ nullable: true })
   image: string;
 
   @ManyToMany(() => Categorie, (categorie) => categorie.products)

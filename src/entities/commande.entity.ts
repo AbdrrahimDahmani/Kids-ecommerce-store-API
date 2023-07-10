@@ -14,7 +14,7 @@ export class Commande {
   @Column()
   dateCommande: Date;
 
-  @Column()
+  @Column('decimal', { precision: 6, scale: 2 })
   prixTotal: number;
 
   @Column()
