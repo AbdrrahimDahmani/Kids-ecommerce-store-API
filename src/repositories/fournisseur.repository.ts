@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { FournisseurDto } from 'src/dtos/fournisseurDto/createFournisseur';
 import { UpdateFournisseurDto } from 'src/dtos/fournisseurDto/update-fournisseur.dto';
@@ -50,7 +51,13 @@ export class FournisseurRepository extends Repository<Fournisseur> {
 
   async deleteFournisseur(id: string): Promise<string> {
     const fournisseur = await this.getFournisseurById(id);
-    if (await this.remove(fournisseur))
+    try {
+      await this.remove(fournisseur);
       return `Fournisseur avec l'id: ${id} est supprimé`;
+    } catch (error) {
+      throw new UnauthorizedException(
+        'Tu ne peux pas supprimer ce fournisseur',
+      );
+    }
   }
 }

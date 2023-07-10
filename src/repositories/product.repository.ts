@@ -1,8 +1,14 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { DataSource, Repository } from 'typeorm';
 import { Product } from '../entities/product.entity';
 import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
+import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
+import { Categorie } from 'src/entities';
 
 @Injectable()
 export class ProductRepository extends Repository<Product> {
@@ -29,7 +35,10 @@ export class ProductRepository extends Repository<Product> {
   }
 
   async getProductById(id: string): Promise<Product> {
-    const found = await this.findOne({ where: { id } });
+    const found = await this.findOne({
+      relations: ['fournisseur', 'marque', 'categorie'],
+      where: { id },
+    });
     if (!found)
       throw new NotFoundException(`Produit avec l'id :  ${id} est non trouvé`);
     return found;
@@ -45,6 +54,7 @@ export class ProductRepository extends Repository<Product> {
       quantiteStock,
       image,
       marque,
+      categories,
       fournisseur,
     } = productDto;
     const newProduct = this.create({
@@ -58,6 +68,52 @@ export class ProductRepository extends Repository<Product> {
       prix,
       marque,
     });
+    if (Array.isArray(categories)) {
+      newProduct.categories = [...categories];
+      // console.log('hi', categories);
+    } else {
+      newProduct.categories = [];
+    }
+
     return await this.save(newProduct);
+  }
+
+  async updateProduct(
+    id: string,
+    productDto: UpdateProductDto,
+  ): Promise<Product> {
+    const {
+      titre,
+      description,
+      tauxPromo,
+      quantiteStock,
+      image,
+      fournisseur,
+      prixFournisseur,
+      prix,
+      marque,
+    } = productDto;
+    const product = await this.getProductById(id);
+    if (titre) product.titre = titre;
+    if (description) product.description = description;
+    if (tauxPromo) product.tauxPromo = tauxPromo;
+    if (quantiteStock) product.quantiteStock = quantiteStock;
+    if (image) product.image = image;
+    if (fournisseur) product.fournisseur = fournisseur;
+    if (prixFournisseur) product.prixFournisseur = prixFournisseur;
+    if (prix) product.prix = prix;
+    if (marque) product.marque = marque;
+    await this.save(product);
+    return product;
+  }
+
+  async deleteProduct(id: string): Promise<string> {
+    const found = await this.getProductById(id);
+    try {
+      await this.remove(found);
+      return `Produit avec l'id: ${id} est supprimer`;
+    } catch (error) {
+      throw new UnauthorizedException(`Produit n'est pas supprimer`);
+    }
   }
 }

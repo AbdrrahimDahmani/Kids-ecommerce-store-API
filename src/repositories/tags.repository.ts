@@ -3,6 +3,7 @@ import {
   Injectable,
   InternalServerErrorException,
   NotFoundException,
+  UnauthorizedException,
 } from '@nestjs/common';
 import { TagDto } from 'src/dtos/tagDto/create-tag.dto';
 import { UpdateTagDto } from 'src/dtos/tagDto/update-tag.dto';
@@ -55,6 +56,11 @@ export class TagRepository extends Repository<Tag> {
 
   async deleteTag(id: number): Promise<string> {
     const tag = await this.getTagById(id);
-    if (await this.remove(tag)) return `tag ${tag.nom} est supprimé`;
+    try {
+      await this.remove(tag);
+      return `tag ${tag.nom} est supprimé`;
+    } catch (error) {
+      throw new UnauthorizedException(`Tag n'est pas supprimer`);
+    }
   }
 }

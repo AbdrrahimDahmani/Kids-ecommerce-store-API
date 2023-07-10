@@ -1,6 +1,7 @@
 import { IsEmail, IsNotEmpty, IsPhoneNumber } from 'class-validator';
 
 export class FournisseurDto {
+  id: string;
   @IsNotEmpty()
   nom: string;
   @IsNotEmpty()

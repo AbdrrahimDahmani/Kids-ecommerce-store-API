@@ -1,6 +1,8 @@
 import { IsNotEmpty, IsString } from 'class-validator';
+import { Product } from 'src/entities';
 
 export class MarqueDto {
+  id: number;
   @IsNotEmpty()
   @IsString()
   nom: string;
@@ -8,4 +10,5 @@ export class MarqueDto {
   @IsNotEmpty()
   @IsString()
   description: string;
+  products: Product;
 }

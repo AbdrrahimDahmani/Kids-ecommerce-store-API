@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { UserDto } from 'src/dtos/userDto/createUser.dto';
 import { FilterUser } from 'src/dtos/userDto/filter-user.dto';
 import { UpdateUserDto } from 'src/dtos/userDto/update-user.dto';
@@ -64,7 +68,13 @@ export class UserRepository extends Repository<User> {
   }
   async deleteUser(id: string): Promise<string> {
     const user = await this.getUserById(id);
-    if (await this.remove(user))
+    try {
+      await this.remove(user);
       return `Utilisateur aved l'id: ${id} est supprimé`;
+    } catch (error) {
+      throw new UnauthorizedException(
+        'Tu ne peux pas supprimer cet utilisateur',
+      );
+    }
   }
 }

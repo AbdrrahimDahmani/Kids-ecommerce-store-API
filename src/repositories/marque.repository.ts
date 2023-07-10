@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from '@nestjs/common';
 import { MarqueDto } from 'src/dtos/marqueDto/create-marque.dto';
 import { UpdateMarqueDto } from 'src/dtos/marqueDto/update-marque.dto';
 import { Marque } from 'src/entities';
@@ -55,7 +59,11 @@ export class MarqueRepository extends Repository<Marque> {
   }
   async deleteMarque(id: number): Promise<string> {
     const marque = await this.getMarqueById(id);
-    if (await this.remove(marque))
+    try {
+      await this.remove(marque);
       return `La marque ${marque.nom} est supprimé`;
+    } catch (error) {
+      throw new UnauthorizedException(`Marque n'est pas supprimer`);
+    }
   }
 }
