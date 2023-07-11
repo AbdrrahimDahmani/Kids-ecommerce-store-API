@@ -38,18 +38,8 @@ export class Product {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Categorie, (categorie) => categorie.products)
-  @JoinTable({
-    name: 'product_categorie',
-    joinColumn: {
-      name: 'product_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'categorie_id',
-      referencedColumnName: 'id',
-    },
-  })
+  @ManyToMany(() => Categorie)
+  @JoinTable({ name: 'product_categorie' })
   categories: Categorie[];
 
   @ManyToOne(() => Marque, (marque) => marque.products)

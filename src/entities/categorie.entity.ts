@@ -7,6 +7,6 @@ export class Categorie {
   id: number;
   @Column({ unique: true })
   nom: string;
-  @ManyToMany(() => Product, (product) => product.categories)
+  @ManyToMany(() => Product)
   products: Product[];
 }

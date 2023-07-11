@@ -8,7 +8,6 @@ import { Product } from '../entities/product.entity';
 import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
 import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
-import { Categorie } from 'src/entities';
 
 @Injectable()
 export class ProductRepository extends Repository<Product> {
@@ -29,14 +28,17 @@ export class ProductRepository extends Repository<Product> {
         },
       );
 
-    const products = await query.getMany();
+    const products = query
+      .innerJoinAndSelect('product.fournisseur', 'fournisseur')
+      .innerJoinAndSelect('product.marque', 'marque')
+      .getMany();
 
     return products;
   }
 
   async getProductById(id: string): Promise<Product> {
     const found = await this.findOne({
-      relations: ['fournisseur', 'marque', 'categorie'],
+      relations: ['fournisseur', 'marque'],
       where: { id },
     });
     if (!found)
@@ -68,12 +70,6 @@ export class ProductRepository extends Repository<Product> {
       prix,
       marque,
     });
-    if (Array.isArray(categories)) {
-      newProduct.categories = [...categories];
-      // console.log('hi', categories);
-    } else {
-      newProduct.categories = [];
-    }
 
     return await this.save(newProduct);
   }
