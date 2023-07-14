@@ -4,6 +4,7 @@ import { UserRepository } from './user.repository';
 import { MarqueRepository } from './marque.repository';
 import { CategorieRepository } from './categorie.repositorty';
 import { ProductCategoriesRepository } from './product-categories.repository';
+import { ProductTagsRepository } from './product-tags.repository';
 
 export {
   UserRepository,
@@ -12,4 +13,5 @@ export {
   MarqueRepository,
   CategorieRepository,
   ProductCategoriesRepository,
+  ProductTagsRepository,
 };

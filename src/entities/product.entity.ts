@@ -50,7 +50,7 @@ export class Product {
   @ManyToOne(() => Marque, (marque) => marque.products)
   marque: Marque[];
 
-  @OneToMany(() => ProductTag, (productTag) => productTag.productTags)
+  @OneToMany(() => ProductTag, (productTag) => productTag.product)
   productTags: ProductTag[];
 
   @ManyToOne(() => Fournisseur)

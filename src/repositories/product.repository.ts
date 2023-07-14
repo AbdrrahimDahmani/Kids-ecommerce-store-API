@@ -9,7 +9,6 @@ import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
 import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
 import { Categorie, ProductCategorie } from 'src/entities';
-import { CategorieRepository } from './categorie.repositorty';
 
 @Injectable()
 export class ProductRepository extends Repository<Product> {
