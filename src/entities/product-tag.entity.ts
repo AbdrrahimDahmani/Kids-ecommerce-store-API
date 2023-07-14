@@ -10,7 +10,7 @@ export class ProductTag {
   @PrimaryColumn()
   public categorieId: number;
   @ManyToOne(() => Product, (product) => product.products)
-  public productTags: Product;
+  public product: Product;
 
   @ManyToOne(() => Tag, (tag) => tag.tags)
   public tag: Tag;
