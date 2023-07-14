@@ -5,12 +5,15 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Categorie } from './categorie.entity';
 import { Marque } from './marque.entity';
 import { Tag } from './tag.entity';
 import { Fournisseur } from './fournisseur.entity';
+import { ProductCategorie } from './product-categorie.entity';
+import { ProductTag } from './product-tag.entity';
 
 @Entity()
 export class Product {
@@ -38,26 +41,17 @@ export class Product {
   @Column({ nullable: true })
   image: string;
 
-  @ManyToMany(() => Categorie)
-  @JoinTable({ name: 'product_categorie' })
-  categories: Categorie[];
+  @OneToMany(
+    () => ProductCategorie,
+    (productCategorie) => productCategorie.product,
+  )
+  products: ProductCategorie[];
 
   @ManyToOne(() => Marque, (marque) => marque.products)
   marque: Marque[];
 
-  @ManyToMany(() => Tag, (tag) => tag.products)
-  @JoinTable({
-    name: 'product_tag',
-    joinColumn: {
-      name: 'product_id',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'tag_id',
-      referencedColumnName: 'id',
-    },
-  })
-  tags: Tag[];
+  @OneToMany(() => ProductTag, (productTag) => productTag.productTags)
+  productTags: ProductTag[];
 
   @ManyToOne(() => Fournisseur)
   @JoinColumn({ name: 'fournisseur_id' })

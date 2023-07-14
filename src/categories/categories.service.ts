@@ -27,6 +27,10 @@ export class CategoriesService {
     return await this.categorieRepo.createCategorie(categorie);
   }
 
+  async initializeCategorie(): Promise<Categorie> {
+    return this.categorieRepo.initializeCategorie();
+  }
+
   async updateCategorie(
     id: number,
     categorie: UpdateCategorieDto,

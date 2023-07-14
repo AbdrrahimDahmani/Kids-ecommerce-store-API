@@ -2,7 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
 import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
-import { Product } from 'src/entities';
+import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
+import { Product, ProductCategorie } from 'src/entities';
 import { ProductRepository } from 'src/repositories';
 
 @Injectable()
@@ -26,5 +27,18 @@ export class ProductsService {
 
   async deleteProduct(id: string): Promise<string> {
     return await this.productsRepository.deleteProduct(id);
+  }
+
+  async updateProduct(
+    id: string,
+    productDto: UpdateProductDto,
+  ): Promise<Product> {
+    return await this.productsRepository.updateProduct(id, productDto);
+  }
+
+  async filterProductByCategorie(
+    categorie: string,
+  ): Promise<ProductCategorie[]> {
+    return await this.productsRepository.filterProductByCategorie(categorie);
   }
 }

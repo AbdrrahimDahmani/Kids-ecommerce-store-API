@@ -4,4 +4,7 @@ export class UpdateCategorieDto {
   @IsString()
   @IsOptional()
   nom: string;
+
+  @IsOptional()
+  image: string;
 }

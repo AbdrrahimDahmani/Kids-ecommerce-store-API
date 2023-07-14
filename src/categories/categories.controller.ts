@@ -10,6 +10,7 @@ import {
 } from '@nestjs/common';
 import { CategoriesService } from './categories.service';
 import { CategorieDto } from 'src/dtos/categorieDto/create-categorie.dto';
+import { Categorie } from 'src/entities';
 
 @Controller('categories')
 export class CategoriesController {
@@ -31,6 +32,11 @@ export class CategoriesController {
   @Post()
   createCategory(@Body() categorie: CategorieDto) {
     return this.categoriesService.createCategorie(categorie);
+  }
+
+  @Post('/initialize')
+  initializeCategorie(): Promise<Categorie> {
+    return this.categoriesService.initializeCategorie();
   }
 
   @Patch('/:id')

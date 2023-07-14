@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 import { Product } from 'src/entities';
 
 export class CategorieDto {
@@ -6,5 +6,7 @@ export class CategorieDto {
   @IsString()
   @IsNotEmpty()
   nom: string;
+  @IsOptional()
+  image: string;
   products: Product[];
 }

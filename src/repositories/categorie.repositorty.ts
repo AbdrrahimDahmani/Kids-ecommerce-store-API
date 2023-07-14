@@ -35,8 +35,8 @@ export class CategorieRepository extends Repository<Categorie> {
   }
 
   async createCategorie(categorieDto: CategorieDto): Promise<Categorie> {
-    const { nom } = categorieDto;
-    this.create({ nom });
+    const { nom, image } = categorieDto;
+    this.create({ nom, image });
     try {
       return await this.save(categorieDto);
     } catch (error) {
@@ -46,14 +46,26 @@ export class CategorieRepository extends Repository<Categorie> {
     }
   }
 
+  async initializeCategorie(): Promise<Categorie> {
+    const initialized = await this.findOneBy({ id: 1 });
+    const categorie = new Categorie();
+    if (initialized) throw new ConflictException('categorie exist deja');
+    else {
+      categorie.id = 1;
+      categorie.nom = 'Uncategorized';
+    }
+
+    return await this.save(categorie);
+  }
+
   async updateCategorie(
     id: number,
     categorieDto: UpdateCategorieDto,
   ): Promise<Categorie> {
-    const { nom } = categorieDto;
+    const { nom, image } = categorieDto;
     const categorie = await this.getCategorieById(id);
     if (nom) categorie.nom = nom;
-
+    if (image) categorie.image = image;
     return await this.save(categorie);
   }
 

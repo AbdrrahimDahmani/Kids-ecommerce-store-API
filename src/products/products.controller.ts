@@ -6,11 +6,13 @@ import {
   Body,
   Delete,
   Param,
+  Patch,
 } from '@nestjs/common';
 import { ProductsService } from './products.service';
 import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
-import { Product } from 'src/entities';
+import { Categorie, Product, ProductCategorie } from 'src/entities';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
+import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
 
 @Controller('products')
 export class ProductsController {
@@ -19,14 +21,16 @@ export class ProductsController {
    */
   constructor(private productService: ProductsService) {}
 
-  @Get('')
+  @Get('/all')
   getAllProduct(@Query() filterProduct: FilterProductDto): Promise<Product[]> {
     return this.productService.getAllProducts(filterProduct);
   }
+
   @Get('/:id')
   getProductById(@Param('id') id: string): Promise<Product> {
     return this.productService.getProductById(id);
   }
+
   @Post()
   createProduct(@Body() productDto: ProductDto): Promise<Product> {
     return this.productService.createProduct(productDto);
@@ -34,5 +38,10 @@ export class ProductsController {
   @Delete('/:id')
   deleteProduct(@Param('id') id: string): Promise<string> {
     return this.productService.deleteProduct(id);
+  }
+
+  @Patch('/:id')
+  updateProduct(@Param('id') id: string, @Body() productDto: UpdateProductDto) {
+    return this.productService.updateProduct(id, productDto);
   }
 }

@@ -4,7 +4,6 @@ import { MarqueDto } from '../marqueDto/create-marque.dto';
 import { TagDto } from '../tagDto/create-tag.dto';
 
 export class ProductDto {
-  id: string;
   titre: string;
   description: string;
   prixFournisseur: number;

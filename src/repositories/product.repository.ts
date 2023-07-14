@@ -8,6 +8,8 @@ import { Product } from '../entities/product.entity';
 import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
 import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
+import { Categorie, ProductCategorie } from 'src/entities';
+import { CategorieRepository } from './categorie.repositorty';
 
 @Injectable()
 export class ProductRepository extends Repository<Product> {
@@ -47,6 +49,8 @@ export class ProductRepository extends Repository<Product> {
   }
 
   async createProduct(productDto: ProductDto): Promise<Product> {
+    const addCategorie = this.datasource.getRepository(ProductCategorie);
+
     const {
       titre,
       description,
@@ -70,8 +74,38 @@ export class ProductRepository extends Repository<Product> {
       prix,
       marque,
     });
+    const createdProduct = await this.save(newProduct);
 
-    return await this.save(newProduct);
+    if (categories) {
+      try {
+        categories.map(async (cat) => {
+          const categorie = await this.datasource
+            .getRepository(Categorie)
+            .countBy({ id: Number(cat) });
+
+          if (categorie > 0) {
+            const productCategorie = addCategorie.create({
+              productId: createdProduct.id,
+              categorieId: Number(cat),
+            });
+            await addCategorie.save(productCategorie);
+          }
+        });
+      } catch (error) {
+        throw new UnauthorizedException(`can't create product`);
+      }
+    } else {
+      const categorie = await this.datasource
+        .getRepository(Categorie)
+        .findOneBy({ nom: 'Uncategorized' });
+      const productCategorie = addCategorie.create({
+        productId: createdProduct.id,
+        categorieId: categorie.id,
+      });
+      await addCategorie.save(productCategorie);
+    }
+
+    return createdProduct;
   }
 
   async updateProduct(
@@ -111,5 +145,24 @@ export class ProductRepository extends Repository<Product> {
     } catch (error) {
       throw new UnauthorizedException(`Produit n'est pas supprimer`);
     }
+  }
+
+  async filterProductByCategorie(nom: string): Promise<ProductCategorie[]> {
+    const getCategorie = await this.datasource
+      .getRepository(Categorie)
+      .createQueryBuilder('categorie')
+      .where('categorie.nom = :nom', { nom })
+      .getOne();
+
+    const idCategorie = getCategorie.id;
+    const productsCategorieRepo =
+      this.datasource.getRepository(ProductCategorie);
+
+    const result = await productsCategorieRepo.find({
+      where: { categorieId: idCategorie },
+      relations: { product: true },
+    });
+    console.log(result);
+    return result;
   }
 }

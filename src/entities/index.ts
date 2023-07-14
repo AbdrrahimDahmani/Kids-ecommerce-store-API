@@ -8,6 +8,8 @@ import { Marque } from './marque.entity';
 import { Product } from './product.entity';
 import { Tag } from './tag.entity';
 import { User } from './user.entity';
+import { ProductCategorie } from './product-categorie.entity';
+import { ProductTag } from './product-tag.entity';
 
 const entities = [
   User,
@@ -20,6 +22,8 @@ const entities = [
   Fournisseur,
   Commercial,
   Admin,
+  ProductCategorie,
+  ProductTag,
 ];
 export {
   User,
@@ -32,5 +36,7 @@ export {
   Fournisseur,
   Commercial,
   Admin,
+  ProductCategorie,
+  ProductTag,
 };
 export default entities;
