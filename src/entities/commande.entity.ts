@@ -5,7 +5,7 @@ import { Commercial } from './commercial.entity';
 
 @Entity()
 export class Commande {
-  @PrimaryGeneratedColumn('increment')
+  @PrimaryGeneratedColumn('uuid')
   id: string;
 
   @ManyToOne(() => User, (user) => user.commandes)
@@ -18,14 +18,13 @@ export class Commande {
   prixTotal: number;
 
   @Column()
-  tauxRemise: number;
-
-  @Column()
   tauxTva: number;
 
   @Column()
   status: CommandeStatus;
 
-  @ManyToOne(() => Commercial, (commercial) => commercial.commandes)
+  @ManyToOne(() => Commercial, (commercial) => commercial.commandes, {
+    nullable: true,
+  })
   commercial: Commercial;
 }
