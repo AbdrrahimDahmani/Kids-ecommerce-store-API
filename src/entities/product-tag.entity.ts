@@ -8,8 +8,8 @@ export class ProductTag {
   public productId: string;
 
   @PrimaryColumn()
-  public categorieId: number;
-  @ManyToOne(() => Product, (product) => product.products)
+  public tagId: number;
+  @ManyToOne(() => Product, (product) => product.productTags)
   public product: Product;
 
   @ManyToOne(() => Tag, (tag) => tag.tags)

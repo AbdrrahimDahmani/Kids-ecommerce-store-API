@@ -1,8 +1,10 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Post } from '@nestjs/common';
 import { ProductTagsService } from './product-tags.service';
-import { Product, ProductTag } from 'src/entities';
+import { ProductTag } from 'src/entities';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('product-tags')
+@ApiTags('product tags')
 export class ProductTagsController {
   /**
    *

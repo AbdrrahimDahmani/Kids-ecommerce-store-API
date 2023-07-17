@@ -12,8 +12,10 @@ import { MarqueService } from './marque.service';
 import { Marque } from 'src/entities';
 import { MarqueDto } from 'src/dtos/marqueDto/create-marque.dto';
 import { UpdateMarqueDto } from 'src/dtos/marqueDto/update-marque.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('marque')
+@ApiTags('marque')
 export class MarqueController {
   /**
    *

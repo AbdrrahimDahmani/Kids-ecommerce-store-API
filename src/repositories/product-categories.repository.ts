@@ -1,6 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CreateProductCategoriesDto } from 'src/dtos/productCategorieDto/create-product-categorie.dto';
-import { UpdateProductCategoriesDto } from 'src/dtos/productCategorieDto/update-product-categorie.dto';
 import { Categorie, Product, ProductCategorie } from 'src/entities';
 import { DataSource, Repository } from 'typeorm';
 
@@ -38,7 +37,10 @@ export class ProductCategoriesRepository extends Repository<ProductCategorie> {
     productId: string,
     categorieId: number,
   ): Promise<ProductCategorie> {
-    return await this.findOneBy({ productId, categorieId });
+    return await this.findOne({
+      where: { productId, categorieId },
+      relations: { product: true, categorie: true },
+    });
   }
 
   async deleteProductCategory(

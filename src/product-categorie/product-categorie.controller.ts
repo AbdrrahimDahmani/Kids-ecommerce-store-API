@@ -2,8 +2,10 @@ import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { ProductCategorieService } from './product-categorie.service';
 import { ProductCategorie } from 'src/entities';
 import { CreateProductCategoriesDto } from 'src/dtos/productCategorieDto/create-product-categorie.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('product-categorie')
+@ApiTags('product categories')
 export class ProductCategorieController {
   /**
    *

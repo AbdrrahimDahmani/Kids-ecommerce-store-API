@@ -1,8 +1,10 @@
 import { Controller, Get, Param } from '@nestjs/common';
 import { ProductsService } from '../products.service';
 import { ProductCategorie } from 'src/entities';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('filter')
+@ApiTags('products')
 export class FilterProductsController {
   /**
    *
