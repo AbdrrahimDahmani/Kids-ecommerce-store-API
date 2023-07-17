@@ -13,8 +13,10 @@ import { FilterProductDto } from 'src/dtos/productDto/filter-product.dto';
 import { Categorie, Product, ProductCategorie } from 'src/entities';
 import { ProductDto } from 'src/dtos/productDto/createProduct.dto';
 import { UpdateProductDto } from 'src/dtos/productDto/update-product.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('products')
+@ApiTags('products')
 export class ProductsController {
   /**
    *

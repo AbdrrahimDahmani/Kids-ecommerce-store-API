@@ -11,8 +11,10 @@ import { Fournisseur } from 'src/entities';
 import { FournisseursService } from './fournisseurs.service';
 import { FournisseurDto } from 'src/dtos/fournisseurDto/createFournisseur';
 import { UpdateFournisseurDto } from 'src/dtos/fournisseurDto/update-fournisseur.dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('fournisseurs')
+@ApiTags('fourniseurs')
 export class FournisseursController {
   /**
    *
