@@ -12,7 +12,7 @@ import { TagsService } from './tags.service';
 import { Tag } from 'src/entities';
 import { TagDto } from 'src/dtos/tagDto/create-tag.dto';
 import { UpdateTagDto } from 'src/dtos/tagDto/update-tag.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('tags')
 @ApiTags('tags')
@@ -23,6 +23,7 @@ export class TagsController {
   constructor(private tagsService: TagsService) {}
 
   @Get('')
+  @ApiQuery({ name: 'nom', required: false, type: String })
   getAllTags(@Query('nom') nom: string) {
     return this.tagsService.getAllTags(nom);
   }

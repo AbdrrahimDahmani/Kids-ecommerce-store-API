@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
-import { ProductTag } from 'src/entities';
-import { DataSource, Repository } from 'typeorm';
+import { CreateProductTagDto } from 'src/dtos/productTagDto/create-product-tag.dto';
+import { Product, ProductTag, Tag } from 'src/entities';
+import { DataSource, ILike, Repository } from 'typeorm';
 
 @Injectable()
 export class ProductTagsRepository extends Repository<ProductTag> {
@@ -23,14 +24,37 @@ export class ProductTagsRepository extends Repository<ProductTag> {
   }
 
   async createProductTag(
-    productId: string,
-    tagId: number,
+    productTagDto: CreateProductTagDto,
   ): Promise<ProductTag> {
-    const found = await this.getProductTagById(productId, tagId);
+    const { productId, tagName } = productTagDto;
     let productTag: ProductTag;
-    if (!found) {
-      productTag = await this.save({ productId, tagId });
+    const tagRepository = this.datasource.getRepository(Tag);
+    const findTag = await tagRepository.findOneBy({ nom: ILike(tagName) });
+    const findProduct = await this.datasource
+      .getRepository(Product)
+      .findOneBy({ id: productId });
+    if (findProduct) {
+      if (findTag) {
+        const tagId = findTag.id;
+        const found = await this.getProductTagById(productId, tagId);
+        if (!found) {
+          productTag = await this.save({ productId, tagId });
+        }
+      } else {
+        const createTag = await tagRepository.save({ nom: tagName });
+        const tagId = createTag.id;
+        productTag = await this.save({ productId, tagId });
+      }
     }
+
     return productTag;
+  }
+
+  async deleteProductTag(productId: string, tagId: number): Promise<string> {
+    const productTag = await this.getProductTagById(productId, tagId);
+    const deleted = await this.delete(productTag);
+    if (deleted) {
+      return 'Product tag deleted';
+    }
   }
 }

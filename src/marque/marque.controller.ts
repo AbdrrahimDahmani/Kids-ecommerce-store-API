@@ -12,7 +12,7 @@ import { MarqueService } from './marque.service';
 import { Marque } from 'src/entities';
 import { MarqueDto } from 'src/dtos/marqueDto/create-marque.dto';
 import { UpdateMarqueDto } from 'src/dtos/marqueDto/update-marque.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('marque')
 @ApiTags('marque')
@@ -23,6 +23,7 @@ export class MarqueController {
   constructor(private marqueService: MarqueService) {}
 
   @Get('')
+  @ApiQuery({ name: 'search', required: false, type: String })
   getMarques(@Query('search') search: string): Promise<Marque[]> {
     return this.marqueService.getAllMarques(search);
   }

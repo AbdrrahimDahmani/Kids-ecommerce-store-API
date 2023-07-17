@@ -11,7 +11,7 @@ import {
 import { CategoriesService } from './categories.service';
 import { CategorieDto } from 'src/dtos/categorieDto/create-categorie.dto';
 import { Categorie } from 'src/entities';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiTags } from '@nestjs/swagger';
 
 @Controller('categories')
 @ApiTags('categories')
@@ -22,6 +22,7 @@ export class CategoriesController {
   constructor(private categoriesService: CategoriesService) {}
 
   @Get('')
+  @ApiQuery({ name: 'nom', required: false, type: String })
   getAllCategories(@Query('nom') nom: string) {
     return this.categoriesService.getAllCategories(nom);
   }
