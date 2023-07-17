@@ -10,6 +10,7 @@ export class ProductDto {
   prix: number;
   tauxPromo: number;
   quantiteStock: number;
+  reference: string;
   image?: string;
   categories: CategorieDto[];
   marque: MarqueDto[];

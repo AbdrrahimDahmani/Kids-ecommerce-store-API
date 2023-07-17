@@ -61,6 +61,7 @@ export class ProductRepository extends Repository<Product> {
       marque,
       categories,
       fournisseur,
+      reference,
     } = productDto;
     const newProduct = this.create({
       titre,
@@ -72,6 +73,7 @@ export class ProductRepository extends Repository<Product> {
       prixFournisseur,
       prix,
       marque,
+      reference,
     });
     const createdProduct = await this.save(newProduct);
 
@@ -121,6 +123,7 @@ export class ProductRepository extends Repository<Product> {
       prixFournisseur,
       prix,
       marque,
+      reference,
     } = productDto;
     const product = await this.getProductById(id);
     if (titre) product.titre = titre;
@@ -132,6 +135,7 @@ export class ProductRepository extends Repository<Product> {
     if (prixFournisseur) product.prixFournisseur = prixFournisseur;
     if (prix) product.prix = prix;
     if (marque) product.marque = marque;
+    if (reference) product.reference = reference;
     await this.save(product);
     return product;
   }

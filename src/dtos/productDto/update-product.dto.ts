@@ -15,4 +15,5 @@ export class UpdateProductDto {
   marque: MarqueDto[];
   tags: TagDto[];
   fournisseur: FournisseurDto;
+  reference: string;
 }

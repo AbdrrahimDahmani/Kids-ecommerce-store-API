@@ -38,6 +38,9 @@ export class Product {
   @Column()
   quantiteStock: number;
 
+  @Column()
+  reference: string;
+
   @Column({ nullable: true })
   image: string;
 
