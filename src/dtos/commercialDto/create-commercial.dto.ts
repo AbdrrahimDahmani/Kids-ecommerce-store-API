@@ -1,7 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
-import { CommandeDto } from '../commandeDto/commande.dto';
+import { Commande } from 'src/entities';
 
-@Entity()
 export class CommercialDto {
   id: string;
 
@@ -17,5 +15,5 @@ export class CommercialDto {
 
   password: string;
 
-  commandes: CommandeDto[];
+  commandes: Commande[];
 }
