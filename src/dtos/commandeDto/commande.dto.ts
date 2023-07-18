@@ -1,11 +1,11 @@
 import { CommandeStatus } from 'src/enum/commande-status.enum';
-import { UserDto } from '../userDto/createUser.dto';
-import { CommercialDto } from '../commercialDto/create-commercial.dto';
+import { IsEnum } from 'class-validator';
+import { Commercial, User } from 'src/entities';
 
 export class CommandeDto {
   id: string;
 
-  user: UserDto;
+  user: User;
 
   dateCommande: Date;
 
@@ -13,7 +13,8 @@ export class CommandeDto {
 
   tauxTva: number;
 
+  @IsEnum(CommandeStatus)
   status: CommandeStatus;
 
-  commercial: CommercialDto;
+  commercial: Commercial;
 }
