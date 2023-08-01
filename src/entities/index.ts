@@ -10,6 +10,8 @@ import { Tag } from './tag.entity';
 import { User } from './user.entity';
 import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
+import { Cart } from './cart.entity';
+import { Cupon } from './cupon.entity';
 
 const entities = [
   User,
@@ -24,6 +26,8 @@ const entities = [
   Admin,
   ProductCategorie,
   ProductTag,
+  Cart,
+  Cupon,
 ];
 export {
   User,
@@ -38,5 +42,7 @@ export {
   Admin,
   ProductCategorie,
   ProductTag,
+  Cart,
+  Cupon,
 };
 export default entities;

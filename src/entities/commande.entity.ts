@@ -1,15 +1,23 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './user.entity';
 import { CommandeStatus } from 'src/enum/commande-status.enum';
 import { Commercial } from './commercial.entity';
+import { LigneCommande } from './ligne-commande.entity';
+import { Cart } from './cart.entity';
 
 @Entity()
 export class Commande {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @ManyToOne(() => User, (user) => user.commandes)
-  user: User;
+  @Column()
+  userId: string;
 
   @Column()
   dateCommande: Date;
@@ -23,8 +31,19 @@ export class Commande {
   @Column()
   status: CommandeStatus;
 
+  @OneToMany(() => LigneCommande, (ligneCommande) => ligneCommande.commande, {
+    cascade: true,
+  })
+  lignesCommande: LigneCommande[];
+
   @ManyToOne(() => Commercial, (commercial) => commercial.commandes, {
     nullable: true,
   })
   commercial: Commercial;
+
+  @OneToMany(() => Cart, (cart) => cart.commande, { cascade: true })
+  carts: Cart[];
+
+  @ManyToOne(() => User, (user) => user.commandes, { cascade: true })
+  user: User;
 }

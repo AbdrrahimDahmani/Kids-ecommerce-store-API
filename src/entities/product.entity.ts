@@ -2,18 +2,16 @@ import {
   Column,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { Categorie } from './categorie.entity';
 import { Marque } from './marque.entity';
-import { Tag } from './tag.entity';
 import { Fournisseur } from './fournisseur.entity';
 import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
+import { Cart } from './cart.entity';
 
 @Entity()
 export class Product {
@@ -59,4 +57,7 @@ export class Product {
   @ManyToOne(() => Fournisseur)
   @JoinColumn({ name: 'fournisseur_id' })
   fournisseur: Fournisseur;
+
+  @OneToMany(() => Cart, (cart) => cart.product)
+  cart: Cart[];
 }

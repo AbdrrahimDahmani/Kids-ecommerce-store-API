@@ -6,6 +6,9 @@ import { CategorieRepository } from './categorie.repositorty';
 import { ProductCategoriesRepository } from './product-categories.repository';
 import { ProductTagsRepository } from './product-tags.repository';
 import { CommandeRepository } from './commande.repository';
+import { LigneCommandeRepository } from './ligne-commande.repository';
+import { TagRepository } from './tags.repository';
+import { CartRepository } from './cart.repository';
 
 export {
   UserRepository,
@@ -16,4 +19,7 @@ export {
   ProductCategoriesRepository,
   ProductTagsRepository,
   CommandeRepository,
+  LigneCommandeRepository,
+  TagRepository,
+  CartRepository,
 };
