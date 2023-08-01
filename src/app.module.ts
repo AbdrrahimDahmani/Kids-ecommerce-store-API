@@ -9,6 +9,8 @@ import { TagsModule } from './tags/tags.module';
 import { ProductCategorieModule } from './product-categorie/product-categorie.module';
 import { ProductTagsModule } from './product-tags/product-tags.module';
 import { CommandeModule } from './commande/commande.module';
+import { CartModule } from './cart/cart.module';
+import { LigneCommandeModule } from './ligne-commande/ligne-commande.module';
 import entities from './entities';
 @Module({
   imports: [
@@ -32,6 +34,8 @@ import entities from './entities';
     ProductCategorieModule,
     ProductTagsModule,
     CommandeModule,
+    CartModule,
+    LigneCommandeModule,
   ],
 })
 export class AppModule {}

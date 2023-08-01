@@ -5,7 +5,7 @@ import { Commercial, User } from 'src/entities';
 export class CommandeDto {
   id: string;
 
-  user: User;
+  userId: string;
 
   dateCommande: Date;
 
@@ -13,7 +13,6 @@ export class CommandeDto {
 
   tauxTva: number;
 
-  @IsEnum(CommandeStatus)
   status: CommandeStatus;
 
   commercial: Commercial;
