@@ -29,11 +29,19 @@ export class ProductRepository extends Repository<Product> {
         },
       );
 
-    const products = query
-      .innerJoinAndSelect('product.fournisseur', 'fournisseur')
-      .innerJoinAndSelect('product.marque', 'marque')
-      .getMany();
-
+    // const products = query
+    //   .innerJoinAndSelect('product.fournisseur', 'fournisseur')
+    //   .innerJoinAndSelect('product.marque', 'marque')
+    //   .getMany();
+    const products = await this.find({
+      relations: {
+        productsCategorie: true,
+        marque: true,
+        productTags: true,
+        fournisseur: true,
+        cart: true,
+      },
+    });
     return products;
   }
 
