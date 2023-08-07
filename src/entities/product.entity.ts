@@ -48,7 +48,7 @@ export class Product {
     () => ProductCategorie,
     (productCategorie) => productCategorie.product,
   )
-  products: ProductCategorie[];
+  productsCategorie: ProductCategorie[];
 
   @ManyToOne(() => Marque, (marque) => marque.products)
   marque: Marque[];

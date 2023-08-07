@@ -9,7 +9,7 @@ export class ProductCategorie {
 
   @PrimaryColumn()
   public categorieId: number;
-  @ManyToOne(() => Product, (product) => product.products)
+  @ManyToOne(() => Product, (product) => product.productsCategorie)
   public product: Product;
 
   @ManyToOne(() => Categorie, (categorie) => categorie.categories)

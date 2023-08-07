@@ -17,16 +17,21 @@ export class ProductCategoriesRepository extends Repository<ProductCategorie> {
     productCategorie: CreateProductCategoriesDto,
   ): Promise<ProductCategorie> {
     const { productId, categorieId } = productCategorie;
-    console.log('hi', typeof categorieId);
+
     const countCategorie = await this.datasource
       .getRepository(Categorie)
       .countBy({ id: categorieId });
     const countProduct = await this.datasource
       .getRepository(Product)
       .countBy({ id: productId });
+    const productCatId = await this.getProductCategorieById(
+      productId,
+      categorieId,
+    );
+
     if (countCategorie === 0 || countProduct === 0) {
       throw new NotFoundException('Categorie ou Produit non trouvé');
-    } else if (countCategorie === 1 && countProduct === 1) {
+    } else if (productCatId) {
       throw new NotFoundException('Categorie du prouit déjà existante');
     }
 
