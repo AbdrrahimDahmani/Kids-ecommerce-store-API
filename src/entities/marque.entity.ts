@@ -5,7 +5,7 @@ import { Product } from './product.entity';
 export class Marque {
   @PrimaryGeneratedColumn('increment')
   id: number;
-  @Column()
+  @Column({ unique: true })
   nom: string;
   @Column()
   description: string;
