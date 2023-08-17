@@ -38,7 +38,11 @@ export class ProductsService {
 
   async filterProductByCategorie(
     categorie: string,
+    limit: number,
   ): Promise<ProductCategorie[]> {
-    return await this.productsRepository.filterProductByCategorie(categorie);
+    return await this.productsRepository.filterProductByCategorie(
+      categorie,
+      limit,
+    );
   }
 }

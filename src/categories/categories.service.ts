@@ -15,8 +15,8 @@ export class CategoriesService {
     private categorieRepo: CategorieRepository,
   ) {}
 
-  async getAllCategories(nom: string): Promise<Categorie[]> {
-    return await this.categorieRepo.getAllCategories(nom);
+  async getAllCategories(nom: string, limit: number): Promise<Categorie[]> {
+    return await this.categorieRepo.getAllCategories(nom, limit);
   }
 
   async getCategorieById(id: number): Promise<Categorie> {

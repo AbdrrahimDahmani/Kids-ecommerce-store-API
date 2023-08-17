@@ -23,8 +23,8 @@ export class CategoriesController {
 
   @Get('')
   @ApiQuery({ name: 'nom', required: false, type: String })
-  getAllCategories(@Query('nom') nom: string) {
-    return this.categoriesService.getAllCategories(nom);
+  getAllCategories(@Query('nom') nom: string, @Query('limit') limit: number) {
+    return this.categoriesService.getAllCategories(nom, limit);
   }
 
   @Get('/:id')

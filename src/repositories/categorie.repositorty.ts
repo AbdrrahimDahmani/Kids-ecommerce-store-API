@@ -15,9 +15,9 @@ export class CategorieRepository extends Repository<Categorie> {
     super(Categorie, datasource.createEntityManager());
   }
 
-  async getAllCategories(nom: string): Promise<Categorie[]> {
+  async getAllCategories(nom: string, limit: number): Promise<Categorie[]> {
     const query = this.createQueryBuilder('categorie');
-
+    if (limit) query.limit(limit);
     if (nom)
       query.andWhere('Lower(categorie.nom) LIKE :search', {
         search: `%${nom.toLowerCase()}%`,

@@ -15,9 +15,9 @@ export class MarqueRepository extends Repository<Marque> {
     super(Marque, dataSource.createEntityManager());
   }
 
-  async getAllMarques(search: string): Promise<Marque[]> {
+  async getAllMarques(search: string, limit: number): Promise<Marque[]> {
     const query = this.createQueryBuilder('marque');
-
+    if (limit) query.limit(limit);
     if (search)
       query.andWhere(
         'Lower(marque.nom) LIKE :search or Lower(marque.description) LIKE :search',
@@ -42,19 +42,20 @@ export class MarqueRepository extends Repository<Marque> {
   }
 
   async createMarque(marqueDto: MarqueDto): Promise<Marque> {
-    const { nom, description } = marqueDto;
+    const { nom, description, image } = marqueDto;
     const newMaruque = this.create({
       nom,
       description,
+      image,
     });
     return await this.save(newMaruque);
   }
   async updateMarque(id: number, marqueDto: UpdateMarqueDto): Promise<Marque> {
-    const { nom, description } = marqueDto;
+    const { nom, description, image } = marqueDto;
     const marque = await this.getMarqueById(id);
     if (nom) marque.nom = nom;
     if (description) marque.description = description;
-
+    if (image) marque.image = image;
     return await this.save(marque);
   }
   async deleteMarque(id: number): Promise<string> {

@@ -12,6 +12,7 @@ import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
 import { Cart } from './cart.entity';
 import { Cupon } from './cupon.entity';
+import { SubCategorie } from './sub-categorie.entity';
 
 const entities = [
   User,
@@ -28,6 +29,7 @@ const entities = [
   ProductTag,
   Cart,
   Cupon,
+  SubCategorie,
 ];
 export {
   User,
@@ -44,5 +46,6 @@ export {
   ProductTag,
   Cart,
   Cupon,
+  SubCategorie,
 };
 export default entities;

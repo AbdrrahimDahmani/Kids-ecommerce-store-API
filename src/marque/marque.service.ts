@@ -14,8 +14,8 @@ export class MarqueService {
     @InjectRepository(MarqueRepository) private marqueRepo: MarqueRepository,
   ) {}
 
-  async getAllMarques(search: string): Promise<Marque[]> {
-    return await this.marqueRepo.getAllMarques(search);
+  async getAllMarques(search: string, limit: number): Promise<Marque[]> {
+    return await this.marqueRepo.getAllMarques(search, limit);
   }
 
   async getMarqueById(id: number): Promise<Marque> {

@@ -158,7 +158,10 @@ export class ProductRepository extends Repository<Product> {
     }
   }
 
-  async filterProductByCategorie(nom: string): Promise<ProductCategorie[]> {
+  async filterProductByCategorie(
+    nom: string,
+    limit: number,
+  ): Promise<ProductCategorie[]> {
     const getCategorie = await this.datasource
       .getRepository(Categorie)
       .createQueryBuilder('categorie')
@@ -172,6 +175,7 @@ export class ProductRepository extends Repository<Product> {
     const result = await productsCategorieRepo.find({
       where: { categorieId: idCategorie },
       relations: { product: true },
+      take: limit,
     });
     console.log(result);
     return result;

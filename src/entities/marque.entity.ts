@@ -9,6 +9,8 @@ export class Marque {
   nom: string;
   @Column()
   description: string;
+  @Column({ nullable: true })
+  image: string;
   @OneToMany(() => Product, (product) => product.marque)
   products: Product;
 }

@@ -24,8 +24,11 @@ export class MarqueController {
 
   @Get('')
   @ApiQuery({ name: 'search', required: false, type: String })
-  getMarques(@Query('search') search: string): Promise<Marque[]> {
-    return this.marqueService.getAllMarques(search);
+  getMarques(
+    @Query('search') search: string,
+    @Query('limit') limit: number,
+  ): Promise<Marque[]> {
+    return this.marqueService.getAllMarques(search, limit);
   }
 
   @Get('/:id')

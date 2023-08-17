@@ -8,4 +8,8 @@ export class UpdateMarqueDto {
   @IsOptional()
   @IsString()
   description: string;
+
+  @IsString()
+  @IsOptional()
+  image: string;
 }
