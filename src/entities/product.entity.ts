@@ -12,6 +12,9 @@ import { Fournisseur } from './fournisseur.entity';
 import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
 import { Cart } from './cart.entity';
+import { ProductSubCategorie } from './product-sub-categories.entity';
+import { SubCategorie } from './sub-categorie.entity';
+import { Galerie } from './galerie.entity';
 
 @Entity()
 export class Product {
@@ -60,4 +63,13 @@ export class Product {
 
   @OneToMany(() => Cart, (cart) => cart.product)
   cart: Cart[];
+
+  @OneToMany(
+    () => ProductSubCategorie,
+    (productSubCategorie) => productSubCategorie.product,
+  )
+  subCategorie: SubCategorie[];
+
+  @OneToMany(() => Galerie, (galerie) => galerie.product)
+  galeries: Galerie[];
 }
