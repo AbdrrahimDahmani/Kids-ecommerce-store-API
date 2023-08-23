@@ -11,8 +11,10 @@ import { Product } from './product.entity';
 export class Galerie {
   @PrimaryGeneratedColumn('increment')
   id: number;
-  @Column({ unique: true, nullable: true })
+  @Column({ nullable: true })
   image: string;
+  @Column({ nullable: true })
+  couleur: string;
   @ManyToOne(() => Product, (product) => product.galeries)
-  product: Product[];
+  product: Product;
 }
