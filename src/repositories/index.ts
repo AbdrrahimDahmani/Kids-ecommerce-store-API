@@ -9,6 +9,7 @@ import { CommandeRepository } from './commande.repository';
 import { LigneCommandeRepository } from './ligne-commande.repository';
 import { TagRepository } from './tags.repository';
 import { CartRepository } from './cart.repository';
+import { GalerieRepository } from './galerie.repository';
 
 export {
   UserRepository,
@@ -22,4 +23,5 @@ export {
   LigneCommandeRepository,
   TagRepository,
   CartRepository,
+  GalerieRepository,
 };

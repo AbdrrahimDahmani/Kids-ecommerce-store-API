@@ -16,22 +16,6 @@ export class GalerieRepository extends Repository<Galerie> {
     super(Galerie, dataSource.createEntityManager());
   }
 
-  //   async getAllGaleries(search: string, limit: number): Promise<Marque[]> {
-  //     const query = this.createQueryBuilder('marque');
-  //     if (limit) query.limit(limit);
-  //     if (search)
-  //       query.andWhere(
-  //         'Lower(marque.nom) LIKE :search or Lower(marque.description) LIKE :search',
-  //         {
-  //           search: `%${search.toLowerCase()}%`,
-  //         },
-  //       );
-
-  //     const marques = await query.getMany();
-
-  //     return marques;
-  //   }
-
   async getGalerieByProductId(productId: string): Promise<Galerie[]> {
     const galerie = await this.createQueryBuilder('galerie')
       .where('productId = :productId', { productId })
