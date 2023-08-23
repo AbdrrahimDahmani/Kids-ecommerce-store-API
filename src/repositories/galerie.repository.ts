@@ -18,7 +18,7 @@ export class GalerieRepository extends Repository<Galerie> {
 
   async getGalerieByProductId(productId: string): Promise<Galerie[]> {
     const galerie = await this.createQueryBuilder('galerie')
-      .where('productId = :productId', { productId })
+      .where('galerie.productId = :productId', { productId })
       .getMany();
     if (galerie.length == 0) throw new NotFoundException('galerie non trouvé');
     return galerie;
