@@ -11,9 +11,9 @@ export class GalerieService {
     private galerieRepo: GalerieRepository,
   ) {}
   async getGalerieByProductId(productId: string): Promise<Galerie[]> {
-    return this.galerieRepo.getGalerieByProductId(productId);
+    return await this.galerieRepo.getGalerieByProductId(productId);
   }
   async createGalerie(galerieDto: GalerieDto): Promise<Galerie> {
-    return this.galerieRepo.createGalerie(galerieDto);
+    return await this.galerieRepo.createGalerie(galerieDto);
   }
 }
