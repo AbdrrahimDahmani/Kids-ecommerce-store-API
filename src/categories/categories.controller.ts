@@ -11,7 +11,7 @@ import {
 import { CategoriesService } from './categories.service';
 import { CategorieDto } from 'src/dtos/categorieDto/create-categorie.dto';
 import { Categorie } from 'src/entities';
-import { ApiQuery, ApiTags } from '@nestjs/swagger';
+import { ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('categories')
 @ApiTags('categories')

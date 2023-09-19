@@ -37,11 +37,11 @@ export class ProductsService {
   }
 
   async filterProductByCategorie(
-    categorie: string,
+    routerLink: string,
     limit: number,
   ): Promise<ProductCategorie[]> {
     return await this.productsRepository.filterProductByCategorie(
-      categorie,
+      routerLink,
       limit,
     );
   }

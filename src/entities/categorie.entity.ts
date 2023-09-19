@@ -10,6 +10,8 @@ export class Categorie {
   nom: string;
   @Column({ nullable: true })
   image: string;
+  @Column({ nullable: true })
+  routerLink: string;
   @OneToMany(
     () => ProductCategorie,
     (productCategorie) => productCategorie.categorie,

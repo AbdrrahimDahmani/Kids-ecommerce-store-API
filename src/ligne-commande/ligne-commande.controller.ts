@@ -2,8 +2,10 @@ import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { LigneCommandeService } from './ligne-commande.service';
 import { LigneCommandeDto } from 'src/dtos/ligneCommandeDto/ligne-commande.dto';
 import { LigneCommande } from 'src/entities';
+import { ApiTags } from '@nestjs/swagger';
 
 @Controller('ligne-commande')
+@ApiTags('ligne-commande')
 export class LigneCommandeController {
   /**
    *

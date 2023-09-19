@@ -11,7 +11,6 @@ import { Marque } from './marque.entity';
 import { Fournisseur } from './fournisseur.entity';
 import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
-import { Cart } from './cart.entity';
 import { ProductSubCategorie } from './product-sub-categories.entity';
 import { SubCategorie } from './sub-categorie.entity';
 import { Galerie } from './galerie.entity';
@@ -60,9 +59,6 @@ export class Product {
   @ManyToOne(() => Fournisseur)
   @JoinColumn({ name: 'fournisseur_id' })
   fournisseur: Fournisseur;
-
-  @OneToMany(() => Cart, (cart) => cart.product)
-  cart: Cart[];
 
   @OneToMany(
     () => ProductSubCategorie,

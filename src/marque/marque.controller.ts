@@ -24,6 +24,7 @@ export class MarqueController {
 
   @Get('')
   @ApiQuery({ name: 'search', required: false, type: String })
+  @ApiQuery({ name: 'limit', required: false, type: Number })
   getMarques(
     @Query('search') search: string,
     @Query('limit') limit: number,

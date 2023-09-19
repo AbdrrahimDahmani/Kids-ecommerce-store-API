@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  ManyToOne,
-  OneToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
-import { Cart } from './cart.entity';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class Cupon {
@@ -21,10 +14,6 @@ export class Cupon {
   active: boolean;
   @Column()
   expiration_date: Date;
-
   @Column()
   created_at: Date;
-
-  @OneToMany(() => Cart, (cart) => cart.cupon)
-  cart: Cart;
 }

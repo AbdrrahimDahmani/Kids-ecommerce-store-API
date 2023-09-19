@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { CommandeDto } from 'src/dtos/commandeDto/commande.dto';
-import { Cart, Commande, LigneCommande, Product } from 'src/entities';
+import { Commande, LigneCommande, Product } from 'src/entities';
 import { CommandeStatus } from 'src/enum/commande-status.enum';
 import { DataSource, Repository } from 'typeorm';
 
@@ -11,7 +11,7 @@ export class CommandeRepository extends Repository<Commande> {
   }
   async getAllCommandes(): Promise<Commande[]> {
     return await this.find({
-      relations: { user: true, commercial: true, carts: true },
+      relations: { user: true, commercial: true },
     });
   }
 
@@ -33,21 +33,6 @@ export class CommandeRepository extends Repository<Commande> {
       status: CommandeStatus.PENDING,
       commercial,
     });
-
-    const cartRepo = this.datasource.getRepository(Cart);
-
-    const carts = await cartRepo
-      .createQueryBuilder('cart')
-      .leftJoinAndSelect('cart.product', 'product')
-      .where('cart.userId = :id', { id: newCommande.userId })
-      .andWhere('cart.commandeId is null')
-      .getMany();
-
-    if (carts.length > 0) {
-      carts.forEach(async (cart) => {
-        newCommande.prixTotal += cart.product.prix * cart.quantity;
-      });
-    }
 
     const commande = await this.save(newCommande);
     return commande;

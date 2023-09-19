@@ -9,7 +9,6 @@ import { User } from './user.entity';
 import { CommandeStatus } from 'src/enum/commande-status.enum';
 import { Commercial } from './commercial.entity';
 import { LigneCommande } from './ligne-commande.entity';
-import { Cart } from './cart.entity';
 
 @Entity()
 export class Commande {
@@ -40,9 +39,6 @@ export class Commande {
     nullable: true,
   })
   commercial: Commercial;
-
-  @OneToMany(() => Cart, (cart) => cart.commande, { cascade: true })
-  carts: Cart[];
 
   @ManyToOne(() => User, (user) => user.commandes, { cascade: true })
   user: User;

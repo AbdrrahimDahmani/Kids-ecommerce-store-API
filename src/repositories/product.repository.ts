@@ -29,17 +29,12 @@ export class ProductRepository extends Repository<Product> {
         },
       );
 
-    // const products = query
-    //   .innerJoinAndSelect('product.fournisseur', 'fournisseur')
-    //   .innerJoinAndSelect('product.marque', 'marque')
-    //   .getMany();
     const products = await this.find({
       relations: {
         productsCategorie: true,
         marque: true,
         productTags: true,
         fournisseur: true,
-        cart: true,
       },
     });
     return products;
@@ -159,13 +154,13 @@ export class ProductRepository extends Repository<Product> {
   }
 
   async filterProductByCategorie(
-    nom: string,
+    routerLink: string,
     limit: number,
   ): Promise<ProductCategorie[]> {
     const getCategorie = await this.datasource
       .getRepository(Categorie)
       .createQueryBuilder('categorie')
-      .where('categorie.nom = :nom', { nom })
+      .where('categorie.routerLink = :routerLink', { routerLink })
       .getOne();
 
     const idCategorie = getCategorie.id;
@@ -177,7 +172,6 @@ export class ProductRepository extends Repository<Product> {
       relations: { product: true },
       take: limit,
     });
-    console.log(result);
     return result;
   }
 }
