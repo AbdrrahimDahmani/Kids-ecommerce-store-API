@@ -2,13 +2,14 @@ import { FournisseurRepository } from './fournisseur.repository';
 import { ProductRepository } from './product.repository';
 import { UserRepository } from './user.repository';
 import { MarqueRepository } from './marque.repository';
-import { CategorieRepository } from './categorie.repositorty';
+import { CategorieRepository } from './categorie.repository';
 import { ProductCategoriesRepository } from './product-categories.repository';
 import { ProductTagsRepository } from './product-tags.repository';
 import { CommandeRepository } from './commande.repository';
 import { LigneCommandeRepository } from './ligne-commande.repository';
 import { TagRepository } from './tags.repository';
 import { GalerieRepository } from './galerie.repository';
+import { CouponRepository } from './coupon.repository';
 
 export {
   UserRepository,
@@ -22,4 +23,5 @@ export {
   LigneCommandeRepository,
   TagRepository,
   GalerieRepository,
+  CouponRepository,
 };

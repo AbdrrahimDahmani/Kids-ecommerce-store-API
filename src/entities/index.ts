@@ -10,7 +10,7 @@ import { Tag } from './tag.entity';
 import { User } from './user.entity';
 import { ProductCategorie } from './product-categorie.entity';
 import { ProductTag } from './product-tag.entity';
-import { Cupon } from './cupon.entity';
+import { Coupon } from './coupon.entity';
 import { SubCategorie } from './sub-categorie.entity';
 import { ProductSubCategorie } from './product-sub-categories.entity';
 import { Galerie } from './galerie.entity';
@@ -28,7 +28,7 @@ const entities = [
   Admin,
   ProductCategorie,
   ProductTag,
-  Cupon,
+  Coupon,
   SubCategorie,
   ProductSubCategorie,
   Galerie,
@@ -46,7 +46,7 @@ export {
   Admin,
   ProductCategorie,
   ProductTag,
-  Cupon,
+  Coupon,
   SubCategorie,
   ProductSubCategorie,
   Galerie,
